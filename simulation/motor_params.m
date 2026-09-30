@@ -1,0 +1,10 @@
+% 电气参数来自电机规格初始化。
+% 机械参数为Simulink初始估计，不代表实测辨识值。
+
+MOTOR_RS_OHM = 2.3;
+MOTOR_LD_H = 0.00086;
+MOTOR_LQ_H = 0.00086;
+MOTOR_FLUX_LINKAGE_WB = 0.0035;
+
+MOTOR_INERTIA_KG_M2 = 1e-5;
+MOTOR_VISCOUS_FRICTION_NM_S = 1e-6;

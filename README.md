@@ -9,6 +9,10 @@
 - 电机：PMSM，7 对极，4096 CPR 编码器
 - 实机测试的标称直流母线：24.1 V
 
+![实机平台](images/52eb6c54b40c343fd8550766dee34e6a.png)
+
+![实验电源](images/bc7bb7ef32eb78f95455c42e6003b363.png)
+
 ## 控制架构
 
 PWM 同步触发电流采样；在电流中断中完成零偏补偿、三相电流变换和独立的 Id/Iq PI。编码器提供转子角度与速度反馈，速度 PI 产生电流参考。电压指令经过逆 Park、逆 Clarke 后，按归一化相电压线性映射并限幅为三相 PWM 占空比。应用状态机负责启动对齐、运行、受控停止、故障锁存与复位恢复。
@@ -30,6 +34,14 @@ PWM 同步触发电流采样；在电流中断中完成零偏补偿、三相电�
 | 故障复位 | RESET→READY：961 ms，其中包含设计的 900 ms 对齐过程 |
 | 软件故障注入 | 状态转换在约 1 ms 主循环的同一周期内被观察到；不是物理响应时间为 0 ms 的结论 |
 
+![实机测试截图](images/a6f1b2d6b1d6f5dce8f8f8f32bdd4eaf.png)
+
+![实机测试截图](images/a4328e2658e43db00499e8af188ba190.png)
+
+![示波器截图](images/3ce6e636e1c785f78d19d323ae0ce0f7.png)
+
+![示波器截图](images/455e4c690b4f8f9d24e6baf83d9df761.png)
+
 ## Simulation Validation
 
 使用 MATLAB R2024b 对仓库中的正式模型重新运行 0–10 s 场景。模型从 t=0 起给定 100 rpm；负载在 t=3 s 从 0.0005 增至 0.001 N·m，仿真过程中未额外调整控制参数。
@@ -43,6 +55,12 @@ PWM 同步触发电流采样；在电流中断中完成零偏补偿、三相电�
 | 9–10 s 稳态速度 / q 轴电流 | 约 100 rpm / 0.02750 A |
 
 上述数值是仿真结果，不代表实机动态性能。
+
+![仿真模型](images/b714f42aecafd3ff75f3921d5bf55148.png)
+
+![速度仿真曲线](images/eaed1aed8efde7d57eb0252eebea9eb6.png)
+
+![电流仿真曲线](images/10f10624f83cba83a4b0518507fcb204.png)
 
 ## 已知边界
 
@@ -63,5 +81,6 @@ simulation/
   motor_params.m
   control_params.m
   simulation_params.m
+images/                 实物图与实验截图
 README.md
 ```
